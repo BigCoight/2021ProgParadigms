@@ -115,6 +115,7 @@ function immutableSummer(f, n, counter = 0, sum = 0) {
     return counter < n ? immutableSummer(f, n, counter + 1, sum + (f(counter) ? counter : 0)) : sum;
 }
 
+
 /*
     Write a function called projectEulerProblem1UsingImmutableSummer 
     that uses your immutableSummer and isDivisibleByThreeOrFive to
