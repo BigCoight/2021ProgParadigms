@@ -1,0 +1,68 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 374db353bf07fed9f5fa930eeb8a349532e69aaba3b01be565a2b09c021066a3
+
+name:           workshop8
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/intro#readme>
+homepage:       https://github.com/githubuser/intro#readme
+bug-reports:    https://github.com/githubuser/intro/issues
+author:         Arthur Mahéo and Tim Dwyer
+maintainer:     tim.dwyer@monash.edu
+copyright:      2019 Arthur Mahéo and Tim Dwyer
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/intro
+
+library
+  exposed-modules:
+      Applicative
+      Base
+      Exercises
+      Functor
+      Parser
+  other-modules:
+      Paths_workshop8
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_workshop8
+  hs-source-dirs:
+      test
+  build-depends:
+      Glob
+    , base >=4.7 && <5
+    , doctest
+  default-language: Haskell2010
+
+test-suite watch
+  type: exitcode-stdio-1.0
+  main-is: Watch.hs
+  other-modules:
+      Paths_workshop8
+  hs-source-dirs:
+      watch
+  build-depends:
+      Glob
+    , ansi-terminal
+    , base >=4.7 && <5
+    , doctest
+    , fsnotify
+  default-language: Haskell2010

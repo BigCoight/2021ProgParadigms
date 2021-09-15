@@ -1,0 +1,142 @@
+Surname     | Firstname        | email    | Contribution% | Any issues?
+=======================================================================
+Zulli       |Anthony Nicholas  | azul0005 | 25%           |
+Morgante    |Giacomo           | gmor0008 | 25%           |
+Lai         |Glorison          | glai0004 | 25%           |
+Ho          |Joshua            | jhoo0017 | 25%           |
+
+
+Ex: 1 
+I: λx.x
+The identity combinatior that returns itself. This can be used to test functions and manipulate the behaviour of other combinators
+
+Ex: 2
+1. b
+2. b
+3. b
+
+Ex: 3
+1. (λx.x)y
+    x [x:= y]
+    y
+
+2. λx.xx
+
+3. (λz.zz)(λy.yy)
+    zz [z:=(λy.yy)]
+	(λy.yy)(λy.yy)
+	Alpha equivalent to original, hence divergent
+	
+4. (λx.xx)y
+	xx [x:=y]
+	yy
+
+Ex: 4
+1. (λy.zy)a
+    zy [y:= a]
+    za
+
+2. (λx.x)(λx.x)
+    x [x:= (λx.x)]
+    (λx.x)
+
+3. (λx.xy)(λx.xx)
+	xy [x := (λx.xx)]
+	(λx.xx)y
+    xx [x:= y]
+    yy
+
+4. (λz.z)(λa.aa)(λz.zb)
+    (z [z := (λa.aa)])(λz.zb)
+    (λa.aa)(λz.zb)
+    aa [a :=(λz.zb)]	
+    (λz.zb)(λz.zb)
+    zb [z := (λz.zb)]
+    (λz.zb)b
+    zb [z := b]
+    bb
+
+Ex: 5
+1. λx.zx
+    z
+
+2. λx.xz
+
+3.(λx.bx)(λy.ay)
+    b(λy.ay)
+    ba
+
+Ex: 6
+1. λx.xxx
+    combinator
+2. λxy.zx
+    not combinator -- Free variable z
+3. λxyz.xy(zx)
+    combinator
+4. λxyz.xy(zxy)
+    combinator
+
+Ex: 7
+	Y=λf.(λx.f(xx))(λx.f(xx))
+    Yg = (λf.(λx.f(xx))(λx.f(xx)))g
+       = (λx.f(xx))(λx.f(xx)) [f:=g]
+       = (λx.g(xx))(λx.g(xx))
+	   = g(xx) [x := (λx.g(xx))]
+       = g((λx.g(xx))(λx.g(xx)))
+	   = g(Yg)
+
+Ex: 8
+	TRUE = λxy. x
+	FALSE = λxy. y
+	IF = λbtf. b t f
+	AND = λλxy. IF x y FALSE
+	OR = λxy. IF x TRUE y
+	NOT = λx. IF x FALSE TRUE
+
+1. NOT FALSE
+    (λx. IF x FALSE TRUE) (FALSE)
+    IF x FALSE TRUE [x := FALSE]
+    IF FALSE FALSE TRUE 
+    (λbtf. b t f) (FALSE FALSE TRUE)
+    b t f [b := FALSE, t := FALSE, f := TRUE]
+    FALSE FALSE TRUE
+    (λxy. y) FALSE TRUE
+    y [y := TRUE, x := FALSE]
+    TRUE 
+
+2. IF (OR TRUE FALSE)
+	IF ((λxy. IF x TRUE y)(TRUE)(FALSE))
+	IF ((IF x TRUE y [x:= TRUE, y := FALSE]))
+	IF ((IF TRUE TRUE FALSE))
+	IF (((λbtf. b t f) TRUE TRUE FALSE))
+	IF ((b t f [b := TRUE, t := TRUE, f := FALSE]))
+	IF ((TRUE TRUE FALSE))
+	IF ((λxy. x) TRUE FALSE)
+	IF ((x [x := TRUE, y := FALSE]))
+	IF (TRUE)
+	(λbtf. b t f) (TRUE)
+	λtf. b t f [b := TRUE]
+    λtf. (TRUE) t f
+	λtf. TRUE t f
+	λtf. (λxy. x) t f
+	λtf. (x [x := t, y := f])
+	λtf. t
+	alpha equivalent to TRUE
+
+3. IF (AND TRUE TRUE)
+   IF ((λxy. IF x y FALSE)(TRUE)(TRUE))
+   IF ((IF x y FALSE)xy [x:= TRUE, y:=TRUE])
+   IF ((IF TRUE TRUE FALSE))
+   IF ((λbtf.btf)(TRUE)(TRUE)(FALSE))
+   IF (btf [b:= TRUE, t:=TRUE, f:= FALSE])
+   IF (TRUE TRUE FALSE)
+   IF ((λxy.x) TRUE FALSE)
+   IF (x [x:= TRUE, y:= FALSE])
+   IF (TRUE)
+   (λbtf.btf) (TRUE)
+   λtf.btf [b:= TRUE]
+   λtf.(TRUE)tf
+   λtf.(λxy.x)tf
+   λtf.(x [x:=t, y:=f])
+   λtf.t
+   alpha equivalent to TRUE

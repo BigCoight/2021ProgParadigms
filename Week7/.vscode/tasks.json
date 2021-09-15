@@ -1,0 +1,60 @@
+{
+  // atuomatically created by phoityne-vscode
+  
+  "version": "2.0.0",
+  "windows": {
+    "command": "cmd",
+    "args": ["/c"]
+  },
+  "linux": {
+    "command": "sh",
+    "args": ["-c"]
+  },
+  "osx": {
+    "command": "sh",
+    "args": ["-c"]
+  },
+  "tasks": [
+    {
+      "label": "stack build",
+      "type": "shell",
+      "args": [
+        "echo START_STACK_BUILD && cd ${workspaceRoot} && stack build && echo END_STACK_BUILD "
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "stack clean & build",
+      "type": "shell",
+      "args": [
+        "echo START_STACK_CLEAN_AND_BUILD && cd ${workspaceRoot} && stack clean && stack build && echo END_STACK_CLEAN_AND_BUILD "
+      ],
+      "problemMatcher": [],
+      "group": {
+        "_id": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "stack test",
+      "type": "shell",
+      "args": [
+        "echo START_STACK_TEST && cd ${workspaceRoot} && stack test && echo END_STACK_TEST "
+      ],
+      "problemMatcher": [],
+      "group": {
+        "_id": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "stack watch",
+      "type": "shell",
+      "args": [
+        "echo START_STACK_WATCH && cd ${workspaceRoot} && stack build --test --no-run-tests --file-watch && echo END_STACK_WATCH "
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
